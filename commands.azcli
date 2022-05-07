@@ -17,7 +17,7 @@ az deployment group create \
 az bicep build --file demo-1/deploygroup.bicep
 az bicep build --file demo-2/main.bicep
 
-az deployment sub what-if \
+az deployment sub what-if \  
     --name 'demo2' \
     --location eastus2 \
     --template-file demo-2/main.bicep 
@@ -26,13 +26,15 @@ az deployment sub what-if \
 az bicep build --file demo-3/blueprintDemo.bicep
 az bicep decompile --file demo-3/fromAzurePortal.json
 
+az bicep decompile --file demo-3/lb-template.json
+
 az deployment group create \
     --name 'demo3' \
-    --resource-group globalAzureRG01 \
+    --resource-group globalAzureRG00 \
     --template-file demo-3/blueprintDemo.bicep \
     --parameters siteName='globalAzureSite01' \
-        administratorLogin='adminBicep' 
-
+        administratorLogin='adminBicep' \
+        administratorLoginPassword='Pa$$w0rd01'
 #demo-4
 az bicep build --file demo-4/main.bicep
 az deployment sub create \

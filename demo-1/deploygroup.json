@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.6.1.6515",
+      "templateHash": "15637517258994604178"
+    }
+  },
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "eastus2"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2021-08-01",
+      "name": "stgbicep01",
+      "location": "[parameters('location')]",
+      "properties": {
+        "accessTier": "Cool"
+      },
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "kind": "BlobStorage",
+      "tags": {
+        "purpose": "GlobalAzureLima"
+      }
+    }
+  ],
+  "outputs": {
+    "stgid": {
+      "type": "string",
+      "value": "[resourceId('Microsoft.Storage/storageAccounts', 'stgbicep01')]"
+    }
+  }
+}

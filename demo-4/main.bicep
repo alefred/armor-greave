@@ -11,7 +11,7 @@ var vmName = 'vm-${projectName}-${uniqueString(projectName)}'
 var nicName = 'nic-${projectName}-${uniqueString(projectName)}'
 
 resource rgbicep01d 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: 'rg-bicep-01'
+  name: 'rg-bicep-04'
   location: location
 }
 
