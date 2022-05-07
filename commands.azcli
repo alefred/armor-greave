@@ -1,0 +1,33 @@
+az login --use-device-code
+az bicep install #not required
+az bicep upgrade
+
+#demo-1
+az deployment sub create \
+    --location eastus2 \
+    --template-file demo-1/deploysub.bicep
+
+az deployment group create \
+    --resource-group rg-bicep-00 \
+    --template-file demo-1/deploygroup.bicep
+
+az deployment group create \
+    --resource-group globalAzureRG01 \
+    --template-file demo-1/blueprintDemo.bicep \
+    --parameters siteName='globalAzureSite01' \
+        administratorLogin='adminBicep' \
+        administratorLoginPassword='GlobalAzure2022@demo' 
+
+
+#demo-2
+az bicep build --file demo-1/deploygroup.bicep
+az bicep build --file demo-2/main.bicep
+az bicep build --file demo-3/blueprintDemo.bicep
+
+az deployment sub what-if \
+    --location eastus2 \
+    --template-file demo-2/main.bicep 
+
+
+#troubleshoot
+az deployment sub list --filter "name eq '{main}'"
