@@ -4,30 +4,44 @@ az bicep upgrade
 
 #demo-1
 az deployment sub create \
+    --name 'demo1-sub' \
     --location eastus2 \
     --template-file demo-1/deploysub.bicep
 
 az deployment group create \
+    --name 'demo1-group' \
     --resource-group rg-bicep-00 \
     --template-file demo-1/deploygroup.bicep
-
-az deployment group create \
-    --resource-group globalAzureRG01 \
-    --template-file demo-1/blueprintDemo.bicep \
-    --parameters siteName='globalAzureSite01' \
-        administratorLogin='adminBicep' \
-        administratorLoginPassword='GlobalAzure2022@demo' 
-
 
 #demo-2
 az bicep build --file demo-1/deploygroup.bicep
 az bicep build --file demo-2/main.bicep
-az bicep build --file demo-3/blueprintDemo.bicep
 
 az deployment sub what-if \
+    --name 'demo2' \
     --location eastus2 \
     --template-file demo-2/main.bicep 
 
+#demo-3
+az bicep build --file demo-3/blueprintDemo.bicep
+az bicep decompile --file demo-3/fromAzurePortal.json
+
+az deployment group create \
+    --name 'demo3' \
+    --resource-group globalAzureRG01 \
+    --template-file demo-3/blueprintDemo.bicep \
+    --parameters siteName='globalAzureSite01' \
+        administratorLogin='adminBicep' 
+
+#demo-4
+az bicep build --file demo-4/main.bicep
+az deployment sub create \
+    --name 'demo4' \
+    --location eastus2 \
+    --template-file demo-4/main.bicep \
+    --parameters projectName='globalAzureDemo1' \
+        vmUser='globalAzureUser' \
+        vmPassword='globalAzurePassword01' 
 
 #troubleshoot
 az deployment sub list --filter "name eq '{main}'"

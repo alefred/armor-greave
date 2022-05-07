@@ -14,3 +14,5 @@ resource stgbicep01d 'Microsoft.Storage/storageAccounts@2021-08-01' = {
     purpose: 'GlobalAzureLima'
   }
 }
+
+output stgid string = stgbicep01d.id
