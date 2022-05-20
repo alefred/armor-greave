@@ -52,6 +52,9 @@ az deployment sub create \
         vmUser='eventUser' \
         vmPassword='eventPassword01' 
 
+# Recommendations and Best Practices:
+- https://github.com/Azure/bicep
+- https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/best-practices
 
 #troubleshoot
 az deployment sub list --filter "name eq '{main}'"
