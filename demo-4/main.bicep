@@ -15,7 +15,7 @@ resource rgbicep01d 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   location: location
 }
 
-module vnetm 'network.bicep' = {
+module vnetm 'Network/virtualNetworks.bicep' = {
   scope: rgbicep01d
   name: 'vnetd'
   params: {
@@ -35,9 +35,9 @@ module vnetm 'network.bicep' = {
   }
 }
 
-module nicm 'nic.bicep' = {
+module nicm 'Network/networkInterfaces.bicep' = {
   scope: rgbicep01d
-  name: 'nicm'
+  name: 'nicd'
   params: {
     location: location
     subnetId: '${vnetm.outputs.vnetId}/subnets/backend'
@@ -46,7 +46,7 @@ module nicm 'nic.bicep' = {
 }
 
 
-module vmm 'vm.bicep' = {
+module vmm 'Compute/virtualMachines.bicep' = {
   scope: rgbicep01d
   name: 'vmd'
   params: {

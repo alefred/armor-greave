@@ -16,9 +16,6 @@ resource virtualMachine 'Microsoft.Compute/virtualMachines@2021-11-01'= {
       vmSize: 'Standard_D1_v2' 
     }
     storageProfile: {
-      // osDisk: {
-      //   createOption: 'FromImage'
-      // }
       imageReference: {
         publisher: 'Canonical'
         offer: 'UbuntuServer'

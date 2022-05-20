@@ -20,4 +20,5 @@
   }
 }
 
+
 output nicId string = nic.id

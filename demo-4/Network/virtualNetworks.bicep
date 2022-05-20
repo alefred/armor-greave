@@ -3,7 +3,7 @@ param vnetname string
 param addressSpace string = '192.168.0.0/24'
 param subnets array
 
-resource vnetd 'Microsoft.Network/virtualNetworks@2021-05-01' = {
+resource vnetd 'Microsoft.Network/virtualNetworks@2021-08-01' = {
   name: vnetname
   location: location
   properties: {
@@ -17,6 +17,8 @@ resource vnetd 'Microsoft.Network/virtualNetworks@2021-05-01' = {
     name: item.subnetName
     properties:{
       addressPrefix: item.subnetAddress
+      privateEndpointNetworkPolicies: 'Enabled'
+      privateLinkServiceNetworkPolicies: 'Enabled'
     }
   }]
 }
