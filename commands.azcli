@@ -17,8 +17,8 @@ az deployment group create \
 az bicep build --file demo-1/deploygroup.bicep
 az bicep build --file demo-2/main.bicep
 
-az deployment sub what-if \  
-    --name 'demo2' \
+az deployment sub what-if \
+    --name 'demo2-capgemini' \
     --location eastus2 \
     --template-file demo-2/main.bicep 
 
@@ -30,7 +30,7 @@ az bicep decompile --file demo-3/lb-template.json
 
 az deployment group create \
     --name 'demo3' \
-    --resource-group globalAzureRG00 \
+    --resource-group capgeminiRG00 \
     --template-file demo-3/blueprintDemo.bicep \
     --parameters siteName='globalAzureSite01' \
         administratorLogin='adminBicep' \
@@ -38,7 +38,7 @@ az deployment group create \
 #demo-4
 az bicep build --file demo-4/main.bicep
 az deployment sub create \
-    --name 'demo4' \
+    --name 'demo4-capgemini' \
     --location eastus2 \
     --template-file demo-4/main.bicep \
     --parameters projectName='globalAzureDemo1' \
