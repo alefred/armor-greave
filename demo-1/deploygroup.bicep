@@ -1,8 +1,8 @@
 param location string = 'eastus2'
 
-resource stgbicep01d 'Microsoft.Storage/storageAccounts@2021-08-01' = { //deifinicion inicial
-  name: 'stgbicep01' //nombre recurso
-  location: location // referencia al parametro location
+resource stgbicep01d 'Microsoft.Storage/storageAccounts@2021-08-01' = { 
+  name: 'stgbicep01'
+  location: location 
   properties:{
     accessTier:'Cool'
   }
