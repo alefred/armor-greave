@@ -12,15 +12,15 @@ resource vnetd 'Microsoft.Network/virtualNetworks@2021-08-01' = {
         addressSpace
       ]
     }
+    subnets:[for item in subnets: {
+      name: item.subnetName
+      properties:{
+        addressPrefix: item.subnetAddress
+        privateEndpointNetworkPolicies: 'Enabled'
+        privateLinkServiceNetworkPolicies: 'Enabled'
+      }
+    }]
   }
-  resource subnetsd 'subnets' = [for item in subnets: {
-    name: item.subnetName
-    properties:{
-      addressPrefix: item.subnetAddress
-      privateEndpointNetworkPolicies: 'Enabled'
-      privateLinkServiceNetworkPolicies: 'Enabled'
-    }
-  }]
 }
 
 

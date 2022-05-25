@@ -43,6 +43,9 @@ module nicm 'Network/networkInterfaces.bicep' = {
     subnetId: '${vnetm.outputs.vnetId}/subnets/backend'
     nicName: nicName
   }
+  dependsOn: [
+    vnetm
+  ]
 }
 
 
@@ -56,4 +59,8 @@ module vmm 'Compute/virtualMachines.bicep' = {
     vmUser:vmUser
     nicId: nicm.outputs.nicId
   }
+  dependsOn: [
+    vnetm
+    nicm
+  ]
 }
