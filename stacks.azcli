@@ -10,14 +10,13 @@ az stack sub validate \
     --template-file demo-4/main.bicep \
     --parameters demo-4/main.bicepparam
 
-az stack sub create \
-    --name 'stack-armor' \
-    --action-on-unmanage 'deleteResources' \
-    --deny-settings-mode 'none' \
-    --template-file 'demo-4/main.bicep' \
-    --parameters 'demo-4/main.bicepparam' \
-    --location 'centralindia' \
-    --yes
+az stack mg validate \
+    --name demoMGDeployment \
+    --location centralindia \
+    --action-on-unmanage deleteResources \
+    --deny-settings-mode none \
+    --management-group-id mg-msdev\
+    --template-uri "https://raw.githubusercontent.com/alefred/armor-greave/ft/stacks/stack-1/main.bicep"
 
 az stack sub create \
     --name 'stack-armor' \
