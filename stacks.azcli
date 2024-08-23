@@ -1,0 +1,47 @@
+az stack sub list -o yamlc
+az stack sub show --name stack-armor -o yamlc
+
+##> Deployment stacks:
+az stack sub validate \
+    --name stack-armor \
+    --location centralindia \
+    --action-on-unmanage deleteResources \
+    --deny-settings-mode none \
+    --template-file demo-4/main.bicep \
+    --parameters demo-4/main.bicepparam
+
+az stack sub create \
+    --name 'stack-armor' \
+    --action-on-unmanage 'deleteResources' \
+    --deny-settings-mode 'none' \
+    --template-file 'demo-4/main.bicep' \
+    --parameters 'demo-4/main.bicepparam' \
+    --location 'centralindia' \
+    --yes
+
+az stack sub create \
+    --name 'stack-armor' \
+    --action-on-unmanage 'deleteResources' \
+    --deny-settings-mode 'none' \
+    --template-file 'demo-4/main.bicep' \
+    --parameters 'demo-4/main.bicepparam' \
+    --location 'centralindia' \
+    --yes
+
+# deatach resources not on stacks and deny delete resources on stacks
+# #detachAll / deleteAll -#denyDelete / denyWriteAndDelete
+az stack sub create \
+    --name 'stack-armor' \
+    --action-on-unmanage 'detachAll'\
+    --deny-settings-mode 'denyDelete' \
+    --template-file 'demo-4/main.bicep' \
+    --parameters 'demo-4/main.bicepparam' \
+    --location 'centralindia' \
+    --yes
+
+# delete
+az stack sub delete \
+    --name stack-armor \
+    --action-on-unmanage deleteAll
+
+az stack sub delete --id <stack-id> --action-on-unmanage detachAll

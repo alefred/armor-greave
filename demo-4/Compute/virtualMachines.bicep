@@ -5,15 +5,13 @@ param nicId string
 @secure()
 param vmPassword string
 
-
-
 // create windows virtual machine
-resource virtualMachine 'Microsoft.Compute/virtualMachines@2021-11-01'= {
-  name:vmName 
+resource virtualMachine 'Microsoft.Compute/virtualMachines@2021-11-01' = {
+  name: vmName
   location: location
-  properties:{
+  properties: {
     hardwareProfile: {
-      vmSize: 'Standard_D1_v2' 
+      vmSize: 'Standard_D1_v2'
     }
     storageProfile: {
       imageReference: {
@@ -37,9 +35,8 @@ resource virtualMachine 'Microsoft.Compute/virtualMachines@2021-11-01'= {
     }
     osProfile: {
       computerName: vmName
-      adminUsername: vmUser 
+      adminUsername: vmUser
       adminPassword: vmPassword
-      }
     }
   }
-  
+}
