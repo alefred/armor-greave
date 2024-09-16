@@ -3,7 +3,7 @@ targetScope = 'subscription'
 param location string = 'eastus2'
 
 resource rgbicep01d 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: 'rg-bicep-02'
+  name: 'rg-armor-grave-02'
   location: location
 }
 

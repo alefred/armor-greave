@@ -1,4 +1,4 @@
 # armor-greave
-Infrastructure as code example for deploy in azure
-#GlobalAzureLima
+Infrastructure as code example for demos in azure
+
 

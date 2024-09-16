@@ -1,22 +1,35 @@
+# Listing and showing
 az stack sub list -o yamlc
 az stack sub show --name stack-armor -o yamlc
 
 ##> Deployment stacks:
+#* Basics
+az stack group validate \
+    --name stack-armor \
+    --resource-group rg-experiments-01 \
+    --action-on-unmanage deleteResources \
+    --deny-settings-mode none \
+    --template-file demo-1/deploygroup.bicep
+
 az stack sub validate \
     --name stack-armor \
     --location centralindia \
     --action-on-unmanage deleteResources \
     --deny-settings-mode none \
-    --template-file demo-4/main.bicep \
-    --parameters demo-4/main.bicepparam
+    --parameters demo-4/main.bicepparam \
+    --template-file demo-4/main.bicep
 
 az stack mg validate \
     --name demoMGDeployment \
-    --location centralindia \
-    --action-on-unmanage deleteResources \
-    --deny-settings-mode none \
     --management-group-id mg-msdev\
-    --template-uri "https://raw.githubusercontent.com/alefred/armor-greave/ft/stacks/stack-1/main.bicep"
+    --action-on-unmanage deleteResources \
+    --location centralindia \
+    --deny-settings-mode none \
+    --template-uri https://raw.githubusercontent.com/alefred/armor-greave/ft/stacks/stack-1/main.bicep
+    # template from remote
+    --template-uri https://raw.githubusercontent.com/alefred/armor-greave/ft/stacks/stack-1/main.json
+    # Additional test
+    --template-file stack-1/main.bicep
 
 az stack sub create \
     --name 'stack-armor' \
@@ -43,4 +56,24 @@ az stack sub delete \
     --name stack-armor \
     --action-on-unmanage deleteAll
 
-az stack sub delete --id <stack-id> --action-on-unmanage detachAll
+#* Additional
+userObjectID=ab0819e8-1a5c-4f6c-9810-38a484eb6695
+az stack group create \
+    --name stack-armor-stg \
+    --resource-group rg-experiments-01 \
+    --action-on-unmanage deleteResources \
+    --deny-settings-mode denyWriteAndDelete \
+    --template-file demo-1/deploygroup.bicep \
+    --deny-settings-excluded-actions "Microsoft.Storage/storageAccounts/listkeys/action" \
+    --deny-settings-excluded-principals $userObjectID
+
+az stack sub create \
+    --name stack-armor-net \
+    --action-on-unmanage deleteResources \
+    --location 'centralindia' \
+    --deny-settings-mode denyWriteAndDelete \
+    --template-file demo-2/main.bicep \
+    --deny-settings-excluded-actions "Microsoft.Network/virtualNetworks/subnets/write Microsoft.Network/networkSecurityGroups/write Microsoft.Network/networkSecurityGroups/join/action" \
+    --deny-settings-excluded-principals $userObjectID \
+    --deny-settings-apply-to-child-scopes
+
