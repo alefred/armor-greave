@@ -6,9 +6,9 @@ resource vnetd 'Microsoft.Network/virtualNetworks@2021-05-01' = {
   location: location
   properties: {
     addressSpace:{
-      // addressPrefixes:[
-      //   '192.168.0.0/16'
-      // ]
+      addressPrefixes:[
+        '192.168.0.0/16'
+      ]
     }
   }
 

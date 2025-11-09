@@ -48,15 +48,14 @@ module nicm 'Network/networkInterfaces.bicep' = {
   ]
 }
 
-
 module vmm 'Compute/virtualMachines.bicep' = {
   scope: rgbicep01d
   name: 'vmd'
   params: {
     location: location
     vmName: vmName
-    vmPassword:vmPassword
-    vmUser:vmUser
+    vmPassword: vmPassword
+    vmUser: vmUser
     nicId: nicm.outputs.nicId
   }
   dependsOn: [

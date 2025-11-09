@@ -1,6 +1,12 @@
 az login --use-device-code
 az bicep install #not required
 az bicep upgrade
+# Additional tricks
+az bicep format --file demo-4/main.bicep
+az bicep lint --file demo-4/main.bicep
+az bicep generate-params \
+    --file demo-4/main.bicep \
+    --output-format bicepparam
 
 #> demo-1
 #TODO: deployment subscription scope
@@ -19,6 +25,7 @@ az deployment group create \
 #TODO: from bicep to ARM template
 az bicep build --file demo-1/deploygroup.bicep
 az bicep build --file demo-2/main.bicep
+az bicep build-params --file <file>
 
 #TODO:  what-if / troubleshoot net-module / create
 az deployment sub what-if \
