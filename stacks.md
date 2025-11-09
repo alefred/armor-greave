@@ -18,23 +18,24 @@
 - **Scenario Description**: Describe a scenario where deployment stacks are used to deploy a multi-tier application.
 - **Feature Highlight**: Focus on how modularity and consistency are achieved using deployment stacks.
 - **Step-by-Step Guide**: Provide a detailed guide on deploying the application.
-  ```bash
-  az stack sub create --name MyStack --location eastus --template-file myTemplate.json --parameters myParameters.json
+```bash
+az stack sub create --name MyStack --location eastus --template-file myTemplate.json --parameters myParameters.json
+``` 
 
 
-5. Use Case 2: Automated Infrastructure Provisioning
+## 5. Use Case 2: Automated Infrastructure Provisioning
 Scenario Description: Describe a scenario involving automated infrastructure provisioning.
 Feature Highlight: Emphasize the scalability and integration with Bicep/ARM.
 Step-by-Step Guide: Offer a detailed guide on setting up automated provisioning.
 az stack sub create --name MyStack --location eastus --template-spec /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/templateSpecs/{templateSpecName}/versions/{version}
 
-6. Use Case 3: Disaster Recovery Setup
+## 6. Use Case 3: Disaster Recovery Setup
 Scenario Description: Explain a use case for setting up disaster recovery.
 Feature Highlight: Focus on the consistency and reliability features of deployment stacks.
 Step-by-Step Guide: Provide instructions on setting up disaster recovery using deployment stacks.
 az stack sub create --name MyStack --location eastus --action-on-unmanage deleteAll
 
-7. Highlighted Features in Use Cases
+## 7. Highlighted Features in Use Cases
 Deny Settings
 Feature Highlight: Deny settings help enforce governance by restricting certain actions on resources.
 Example:
@@ -70,13 +71,15 @@ Feature Highlight: Allows you to specify a URI for the template file.
 Example:
 az stack sub create --name MyStack --location eastus --template-uri https://example.com/template.json
 
-8. Real-World Examples
+## 8. Real-World Examples
 Case Studies: Include real-world examples or case studies of organizations successfully using Azure deployment stacks.
 Lessons Learned: Share insights and lessons learned from these examples.
-9. Conclusion
+
+## 9. Conclusion
 Summary: Recap the key points discussed in the article.
 Call to Action: Encourage readers to explore Azure deployment stacks for their own projects and provide links to additional resources.
-10. Additional Resources
+
+## 10. Additional Resources
 Links and References: Provide links to official Azure documentation, tutorials, and other relevant resources.
 Community and Support: Mention forums, communities, and support channels where readers can seek help.
 
