@@ -1,0 +1,12 @@
+#> demo-1
+#TODO: Resource module
+# bicep
+az deployment group what-if \
+    --name 'deploy-avm' \
+    --resource-group rg-avm-we-01 \
+    --template-file 101/avm-bicep-1/main.bicep
+# terraform
+terraform apply -auto-approve
+
+#> demo-2
+#TODO: Pattern module

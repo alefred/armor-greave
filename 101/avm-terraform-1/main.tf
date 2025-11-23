@@ -1,8 +1,8 @@
 locals {
-  location = "westeurope"
-  snet_id = "/subscriptions/60415b52-6f99-42d1-8807-7a2eb5457dcf/resourceGroups/rg-network-core-we-01/providers/Microsoft.Network/virtualNetworks/vnet-network-core-we-01/subnets/paas"
-  pdns_zone_id = "/subscriptions/60415b52-6f99-42d1-8807-7a2eb5457dcf/resourceGroups/rg-dns-core-we-01/providers/Microsoft.Network/privateDnsZones/privatelink.blob.core.windows.net"
-  rg_name ="rg-avm-we-01"
+  location             = "westeurope"
+  snet_id              = "/subscriptions/60415b52-6f99-42d1-8807-7a2eb5457dcf/resourceGroups/rg-network-core-we-01/providers/Microsoft.Network/virtualNetworks/vnet-network-core-we-01/subnets/paas"
+  pdns_zone_id         = "/subscriptions/60415b52-6f99-42d1-8807-7a2eb5457dcf/resourceGroups/rg-dns-core-we-01/providers/Microsoft.Network/privateDnsZones/privatelink.blob.core.windows.net"
+  rg_name              = "rg-avm-we-01"
   storage_account_name = "stoavmexwe001"
 }
 
