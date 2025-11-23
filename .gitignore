@@ -42,4 +42,5 @@ terraform.rc
 __tmp__/
 
 # Azurite
-__queuestorage__/
+__queuestorage__
+__azurite_db**

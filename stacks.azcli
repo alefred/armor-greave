@@ -11,13 +11,21 @@ az stack group validate \
     --deny-settings-mode none \
     --template-file demo-1/deploygroup.bicep
 
-az stack sub validate \
-    --name stack-armor \
-    --location centralindia \
+az stack group validate \
+    --name 'avm-advance' \
+    --resource-group rg-experiments-12 \
+    --action-on-unmanage 'deleteResources' \
+    --deny-settings-mode 'none' \
+    --parameters location=eastus2 \
+    --template-file '102/avm-aks/aks-cluster.bicep'
+
+az stack sub delete \
+    --name stack-avm \
     --action-on-unmanage deleteResources \
+    --location northeurope \
     --deny-settings-mode none \
-    --parameters demo-4/main.bicepparam \
-    --template-file demo-4/main.bicep
+    --template-file '102/avm-aks/aks-cluster.bicep' \
+    --parameters demo-4/main.bicepparam 
 
 az stack mg validate \
     --name demoMGDeployment \
@@ -30,6 +38,14 @@ az stack mg validate \
     --template-uri https://raw.githubusercontent.com/alefred/armor-greave/ft/stacks/stack-1/main.json
     # Additional test
     --template-file stack-1/main.bicep
+
+az stack mg create \
+    --name MGalz \
+    --management-group-id mg_alz_avm \
+    --action-on-unmanage deleteResources \
+    --location centralindia \
+    --deny-settings-mode none \
+    --template-file 102/avm-alz/alz.bicep
 
 az stack sub create \
     --name 'stack-armor' \

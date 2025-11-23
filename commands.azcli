@@ -33,6 +33,11 @@ az deployment sub what-if \
     --location eastus2 \
     --template-file demo-2/main.bicep 
 
+az deployment sub create \
+    --location northeurope \
+    --template-file 102/avm-aks/aks-cluster.bicep
+
+
 #> demo-3
 #TODO: size bicep vs ARM / dependencies
 az bicep build --file demo-3/blueprintDemo.bicep
