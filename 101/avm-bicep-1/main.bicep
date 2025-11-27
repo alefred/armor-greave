@@ -32,3 +32,5 @@ module storageAccount 'br/public:avm/res/storage/storage-account:0.29.0' = {
     ]
   }
 }
+
+output demo string = storageAccount.name

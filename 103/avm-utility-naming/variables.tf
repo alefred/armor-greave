@@ -1,6 +1,7 @@
 variable "subscription_id" {
   description = "The Azure subscription ID"
   type        = string
+  default     = "60415b52-6f99-42d1-8807-7a2eb5457dcf"
 }
 
 variable "location" {
@@ -44,10 +45,4 @@ This variable controls whether or not telemetry is enabled for the module.
 For more information see <https://aka.ms/avm/telemetryinfo>.
 If it is set to false, then no telemetry will be collected.
 DESCRIPTION
-}
-
-variable "shared_key" {
-  type        = string
-  description = "The shared key for the VPN connection"
-  sensitive   = true
 }

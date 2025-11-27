@@ -31,7 +31,7 @@ locals {
   sequence     = format("%03d", var.resource_name_sequence_start)
 
   # Create consistent name patterns
-  name_templates = {
+  name_templates_v2 = {
     for resource_type, prefix in local.prefixes :
     resource_type => contains(["st"], prefix) ?
     "${prefix}${local.organization}${var.environment}${local.region_code}${var.workload}" :
@@ -39,5 +39,34 @@ locals {
   }
 
   # Add resource group names
-  resource_group_names = ["bastion", "dns", "dnsresolver", "firewall", "monitoring", "network", "route"]
+  resource_group_names_v2 = ["bastion", "dns", "dnsresolver", "firewall", "monitoring", "network", "route"]
+
+# ######--------------- Automated completely
+  resource_abbreviations = tomap({ for k, v in module.naming : k => v.name if can(v.name) })
+  custom_abbreviations = {
+    other = "lui"
+  }
+  all_abbreviations = merge(local.resource_abbreviations, local.custom_abbreviations)
+  environment       = "dll"
+  sufix             = "sufix"
+  project           = local.configs.general.short_name
+  config_tags       = local.configs.general.tags
+
+  vnet_rg_name = replace(local.name_templates.resource_group, "${local.project}-${local.sufix}", "connectivity")
+  vnet_name    = replace(local.name_templates.virtual_network, "${local.project}-${local.sufix}", "connectivity")
+  subnet_cidr  = local.configs.general.databricks_configuration.subnet_cidr
+  common_tags = {
+    Developer   = "LA"
+    Application = "MLOPS"
+  }
+  tags = merge(local.common_tags, try(local.config_tags, {}))
+
+  # Create consistent name patterns
+  name_templates = {
+    for resource_type, prefix in local.all_abbreviations :
+    resource_type => contains(["st"], prefix) ?
+    "${prefix}mlops${local.project}${local.sufix}${local.environment}" :
+    "${prefix}-mlops-${local.project}-${local.sufix}-${local.environment}"
+  }
+  resource_group_names = ["network", "data"]
 }

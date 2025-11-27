@@ -6,7 +6,32 @@ az deployment group what-if \
     --resource-group rg-avm-we-01 \
     --template-file 101/avm-bicep-1/main.bicep
 # terraform
-terraform apply -auto-approve
+terraform plan
 
 #> demo-2
-#TODO: Pattern module
+#TODO: Tips tricks
+bicep console
+> var users = [
+  { name: 'Alice', age: 30 }
+  { name: 'Bob', age: 25 }
+]
+> map(users, user => user.name)
+
+> filter(users, user => user.age > 26)
+
+#> Stacks on bicep
+az stack group create \
+    --name 'avm-advance' \
+    --resource-group rg-experiments-01 \
+    --action-on-unmanage 'deleteResources' \
+    --deny-settings-mode 'none' \
+    --parameters location=westeurope \
+    --template-file '101/demo-1/deploygroup.bicep'
+
+az stack sub delete \
+    --name avm-advance \
+    --action-on-unmanage deleteAll
+
+ 
+#> Terraform console and override. >avm-utility-naming
+module.regions.regions_by_name_or_display_name["westeurope"]
